@@ -23,6 +23,12 @@ class _SplashpageState extends State<Splashpage> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Size size = Get.size;
     return Scaffold(
