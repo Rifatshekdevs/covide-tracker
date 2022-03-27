@@ -32,6 +32,7 @@ class _SplashpageState extends State<Splashpage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final Size size = Get.size;
     return Scaffold(
+      backgroundColor: Colors.black54,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,7 +59,7 @@ class _SplashpageState extends State<Splashpage> with TickerProviderStateMixin {
               alignment: Alignment.center,
               child: KText(
                 text: 'Covid-19\nTrackers',
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ))

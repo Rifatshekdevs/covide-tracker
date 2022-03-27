@@ -15,4 +15,17 @@ class ApiController extends GetxController {
       throw Exception('Error');
     }
   }
+
+  Future<List<dynamic>> getCountries() async {
+    var data;
+    final res = await http.get(Uri.parse(ApiUrl.fetchCountires));
+
+    if (res.statusCode == 200) {
+      data = jsonDecode(res.body.toString());
+      print(data);
+      return data;
+    } else {
+      throw Exception('Error');
+    }
+  }
 }

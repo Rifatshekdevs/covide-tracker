@@ -1,5 +1,6 @@
 import 'package:covid_trackers/src/controller/api_controller.dart';
 import 'package:covid_trackers/src/model/all_data.dart';
+import 'package:covid_trackers/src/pages/countries_page.dart';
 import 'package:covid_trackers/src/widget/rowItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final Size size = Get.size;
     return Scaffold(
+      backgroundColor: Colors.grey[500],
       body: Column(
         children: [
           SizedBox(
@@ -45,7 +47,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     flex: 1,
                     child: Center(
                       child: SpinKitCubeGrid(
-                        color: Colors.grey,
+                        color: Colors.white,
                         size: 50,
                       ),
                     ),
@@ -56,8 +58,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       PieChart(
                         chartRadius: 130,
                         legendOptions: LegendOptions(
-                          legendPosition: LegendPosition.left,
-                        ),
+                            legendPosition: LegendPosition.left,
+                            legendTextStyle: TextStyle(color: Colors.white)),
                         dataMap: {
                           'Total':
                               double.parse(snapshot.data!.cases.toString()),
@@ -125,7 +127,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         height: 45,
                         child: ElevatedButton(
                           child: Text('Track Countries'),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(CountriesPage());
+                          },
                         ),
                       ),
                     ],

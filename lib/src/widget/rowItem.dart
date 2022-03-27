@@ -15,8 +15,14 @@ class RowItem extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              KText(text: title),
-              KText(text: value),
+              KText(
+                text: title,
+                color: Colors.white70,
+              ),
+              KText(
+                text: value,
+                color: Colors.white70,
+              ),
             ],
           ),
         ),
