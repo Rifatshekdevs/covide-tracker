@@ -1,3 +1,4 @@
+import 'package:covid_trackers/src/config/hexColors.dart';
 import 'package:covid_trackers/src/controller/api_controller.dart';
 import 'package:covid_trackers/src/model/all_data.dart';
 import 'package:covid_trackers/src/pages/countries_page.dart';
@@ -33,7 +34,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final Size size = Get.size;
     return Scaffold(
-      backgroundColor: Colors.grey[500],
+      resizeToAvoidBottomInset: false,
+      backgroundColor: hexToColor('#303030'),
       body: Column(
         children: [
           SizedBox(
@@ -44,7 +46,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               builder: ((context, AsyncSnapshot<AllData> snapshot) {
                 if (!snapshot.hasData) {
                   return Expanded(
-                    flex: 1,
                     child: Center(
                       child: SpinKitCubeGrid(
                         color: Colors.white,
@@ -81,9 +82,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       Padding(
                         padding: EdgeInsets.all(15.0),
                         child: Card(
-                          color: Colors.black12,
+                          color: Colors.grey.shade700,
                           child: Column(
                             children: [
+                              SizedBox(
+                                height: 5,
+                              ),
                               RowItem(
                                   title: 'Total',
                                   value: snapshot.data!.cases.toString()),
@@ -120,7 +124,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ),
                       SizedBox(
-                        height: size.height * 0.08,
+                        height: size.height * 0.06,
                       ),
                       SizedBox(
                         width: size.width * 0.90,
@@ -130,6 +134,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           onPressed: () {
                             Get.to(CountriesPage());
                           },
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                  hexToColor('#285D99'))),
                         ),
                       ),
                     ],

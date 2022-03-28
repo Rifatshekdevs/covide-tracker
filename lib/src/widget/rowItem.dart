@@ -28,7 +28,7 @@ class RowItem extends StatelessWidget {
         ),
         SizedBox(height: 5),
         Divider(
-          height: 2,
+          height: 10,
         ),
       ],
     );

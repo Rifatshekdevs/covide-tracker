@@ -1,3 +1,4 @@
+import 'package:covid_trackers/src/config/hexColors.dart';
 import 'package:covid_trackers/src/config/ktext.dart';
 import 'package:covid_trackers/src/controller/api_controller.dart';
 import 'package:covid_trackers/src/pages/details_page.dart';
@@ -18,9 +19,9 @@ class _CountriesPageState extends State<CountriesPage> {
   Widget build(BuildContext context) {
     allDataC.getCountries();
     return Scaffold(
-      backgroundColor: Colors.grey[500],
+      backgroundColor: hexToColor('#303030'),
       appBar: AppBar(
-        backgroundColor: Colors.grey[500],
+        backgroundColor: hexToColor('#303030'),
         elevation: 0,
         leading: IconButton(
             onPressed: () {
@@ -38,9 +39,14 @@ class _CountriesPageState extends State<CountriesPage> {
                 setState(() {});
               },
               decoration: InputDecoration(
+                  enabled: true,
+                  fillColor: Colors.grey.shade700,
+                  filled: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 25),
                   hintText: 'Search country name',
+                  hintStyle: TextStyle(color: Colors.white),
                   border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
                     borderRadius: BorderRadius.circular(50),
                   )),
             ),
@@ -53,6 +59,8 @@ class _CountriesPageState extends State<CountriesPage> {
                     return shimmarLoad();
                   } else {
                     return ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        physics: NeverScrollableScrollPhysics(),
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
                           String name = snapshot.data![index]['country'];
@@ -61,7 +69,23 @@ class _CountriesPageState extends State<CountriesPage> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Get.to(DetailsPage());
+                                    Get.to(DetailsPage(
+                                      image: snapshot.data![index]
+                                          ['countryInfo']['flag'],
+                                      name: snapshot.data![index]['country'],
+                                      totalCases: snapshot.data![index]
+                                          ['cases'],
+                                      totalRecovered: snapshot.data![index]
+                                          ['recovered'],
+                                      totalDeaths: snapshot.data![index]
+                                          ['deaths'],
+                                      active: snapshot.data![index]['active'],
+                                      critical: snapshot.data![index]
+                                          ['critical'],
+                                      todayRecovered: snapshot.data![index]
+                                          ['todayRecovered'],
+                                      test: snapshot.data![index]['tests'],
+                                    ));
                                   },
                                   child: ListTile(
                                     title: KText(
@@ -90,23 +114,44 @@ class _CountriesPageState extends State<CountriesPage> {
                               .contains(searchController.text.toLowerCase())) {
                             return Column(
                               children: [
-                                ListTile(
-                                  title: KText(
-                                    text: snapshot.data![index]['country'],
-                                    color: Colors.white,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  subtitle: KText(
-                                    text: snapshot.data![index]['cases']
-                                        .toString(),
-                                    color: Colors.white,
-                                  ),
-                                  leading: Image(
-                                    height: 50,
-                                    width: 50,
-                                    image: NetworkImage(snapshot.data![index]
-                                        ['countryInfo']['flag']),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(DetailsPage(
+                                      image: snapshot.data![index]
+                                          ['countryInfo']['flag'],
+                                      name: snapshot.data![index]['country'],
+                                      totalCases: snapshot.data![index]
+                                          ['cases'],
+                                      totalRecovered: snapshot.data![index]
+                                          ['recovered'],
+                                      totalDeaths: snapshot.data![index]
+                                          ['deaths'],
+                                      active: snapshot.data![index]['active'],
+                                      critical: snapshot.data![index]
+                                          ['critical'],
+                                      todayRecovered: snapshot.data![index]
+                                          ['todayRecovered'],
+                                      test: snapshot.data![index]['tests'],
+                                    ));
+                                  },
+                                  child: ListTile(
+                                    title: KText(
+                                      text: snapshot.data![index]['country'],
+                                      color: Colors.white,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    subtitle: KText(
+                                      text: snapshot.data![index]['cases']
+                                          .toString(),
+                                      color: Colors.white,
+                                    ),
+                                    leading: Image(
+                                      height: 50,
+                                      width: 50,
+                                      image: NetworkImage(snapshot.data![index]
+                                          ['countryInfo']['flag']),
+                                    ),
                                   ),
                                 )
                               ],

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:covid_trackers/src/config/hexColors.dart';
 import 'package:covid_trackers/src/config/ktext.dart';
 import 'package:covid_trackers/src/pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _SplashpageState extends State<Splashpage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final Size size = Get.size;
     return Scaffold(
-      backgroundColor: Colors.black54,
+      backgroundColor: hexToColor('#303030'),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
